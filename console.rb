@@ -12,5 +12,8 @@ harry = Student.new({'first_name' => 'Harry', 'second_name' => 'Potter',
   'house' => 'Gryffindor', 'age' => '12'})
   harry.save()
 
+all_students = Student.find_all()
+
+
   binding.pry
   nil

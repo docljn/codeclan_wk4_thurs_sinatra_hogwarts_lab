@@ -13,6 +13,27 @@ def initialize(options)
   @age = options['age'].to_i
 end
 
+
+# CLASS METHODS
+
+def self.find_all()
+  sql = "SELECT * FROM students;"
+  values = []
+  result = SqlRunner.run(sql, values)
+  returned_objects = result.map {|hash| Student.new(hash)}
+end
+
+def self.find_by_id(id)
+  sql = "SELECT * FROM students WHERE id = $1;"
+  values = [id]
+  result = SqlRunner.run(sql, values)
+  student = Student.new(result[0])
+end
+
+
+
+# INSTANCE METHODS
+
 def save()
   sql = "INSERT INTO students (
     first_name,
