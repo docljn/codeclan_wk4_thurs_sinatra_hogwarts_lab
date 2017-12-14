@@ -14,3 +14,10 @@ end
 get('/students/new') do
   erb(:new)
 end
+
+# save new
+post('/students') do
+  @student = Student.new(params)
+  @student.save()
+  redirect "/students"
+end
