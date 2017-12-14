@@ -1,3 +1,5 @@
+require_relative('../db/sql_runner.rb')
+
 class Student
 
   attr_reader :id
@@ -9,6 +11,20 @@ def initialize(options)
   @second_name = options['second_name']
   @house = options['house']
   @age = options['age'].to_i
+end
+
+def save()
+  sql = "INSERT INTO students (
+    first_name,
+    second_name,
+    house,
+    age
+  ) VALUES (
+    $1, $2, $3, $4
+    ) RETURNING id;"
+    values = [@first_name, @second_name, @house, @age]
+    result = SqlRunner.run(sql, values).first['id'].to_i
+    @id = result
 end
 
 end
